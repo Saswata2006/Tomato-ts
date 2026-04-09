@@ -10,19 +10,19 @@ import orderRouter from "./routes/orderRoute.js";
 
 // 🔥 Global Error Handlers (never let your app die silently)
 process.on("uncaughtException", (err) => {
-  console.error("💥 Uncaught Exception:", err);
+  console.error("Uncaught Exception:", err);
 });
 
 process.on("unhandledRejection", (err) => {
-  console.error("💥 Unhandled Rejection:", err);
+  console.error("Unhandled Rejection:", err);
 });
 
 // 🚀 App Config
 const app = express();
-const port = process.env.PORT || 5002;
 
 // 🧩 Middlewares
-app.use(express.json());
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // 🌍 CORS - Fully open but safe for dev
 app.use(cors({
@@ -37,7 +37,7 @@ app.options("*", cors());
 
 // 🔍 Debug incoming requests (optional but useful)
 app.use((req, res, next) => {
-  console.log(`📡 ${req.method} request from ${req.headers.origin || "unknown origin"} → ${req.url}`);
+  console.log(`${req.method} request from ${req.headers.origin || "unknown origin"} -> ${req.url}`);
   next();
 });
 
@@ -53,20 +53,30 @@ app.use("/api/order", orderRouter);
 
 // 🏠 Test Route
 app.get("/", (req, res) => {
-  res.send("✅ API Working");
+  res.json({ message: "API Working", status: "success" });
 });
 
-// 🚀 Start Server
-const server = app.listen(port, () => {
-  console.log(`🚀 Server started on http://localhost:${port}`);
+// Health check endpoint for Vercel
+app.get("/health", (req, res) => {
+  res.json({ status: "healthy", timestamp: new Date().toISOString() });
 });
 
-// ❌ Handle server errors (like port already in use)
-server.on("error", (err) => {
-  console.error("❌ Server Error:", err.message);
+// Export for Vercel
+export default app;
 
-  if (err.code === "EADDRINUSE") {
-    console.log(`⚠️ Port ${port} is already in use.`);
-    console.log("👉 Run: kill -9 $(lsof -ti :" + port + ")");
-  }
-});
+// Start server for local development
+if (process.env.NODE_ENV !== "production") {
+  const port = process.env.PORT || 5002;
+  const server = app.listen(port, () => {
+    console.log(`Server started on http://localhost:${port}`);
+  });
+
+  server.on("error", (err) => {
+    console.error("Server Error:", err.message);
+
+    if (err.code === "EADDRINUSE") {
+      console.log(`Port ${port} is already in use.`);
+      console.log("Run: kill -9 $(lsof -ti :" + port + ")");
+    }
+  });
+}
