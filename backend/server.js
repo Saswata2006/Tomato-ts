@@ -44,12 +44,21 @@ app.use((req, res, next) => {
 // 🗄️ Database Connection
 connectDB();
 
-// 📦 API Routes
-app.use("/api/user", userRouter);
-app.use("/api/food", foodRouter);
-app.use("/images", express.static("uploads"));
-app.use("/api/cart", cartRouter);
-app.use("/api/order", orderRouter);
+// 📦 API Routes - Handle both direct and Vercel routing
+const apiRoutes = (prefix = '') => {
+  app.use(`${prefix}/api/user`, userRouter);
+  app.use(`${prefix}/api/food`, foodRouter);
+  app.use(`${prefix}/images`, express.static("uploads"));
+  app.use(`${prefix}/api/cart`, cartRouter);
+  app.use(`${prefix}/api/order`, orderRouter);
+};
+
+// For Vercel deployment with /_/backend prefix
+if (process.env.VERCEL) {
+  apiRoutes('/_/backend');
+} else {
+  apiRoutes();
+}
 
 // 🏠 Test Route
 app.get("/", (req, res) => {
