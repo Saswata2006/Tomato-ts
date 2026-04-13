@@ -352,8 +352,8 @@ Users needed a seamless food ordering experience with:
 ## 🚀 Deployment & Production
 
 ### Vercel Deployment
-- **Frontend URL**: https://tomato-food-delivery.vercel.app
-- **Backend URL**: https://tomato-backend.vercel.app (optional)
+- **Frontend URL**: https://tomato-ts-9jwz.vercel.app/
+- **Backend URL**: https://tomato-backend.vercel.app (not deploy till now)
 - **Environment**: Production-optimized builds with mock data fallback
 - **CI/CD**: Automated testing and deployment pipeline
 
