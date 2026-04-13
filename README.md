@@ -1,12 +1,12 @@
-# 🍅 Tomato Food Delivery App
+#  Tomato Food Delivery App
 
 A modern, full-stack food delivery application built with React, Node.js, and MongoDB.
 
-## 📋 Project Overview
+##  Project Overview
 
 Tomato is a comprehensive food ordering platform that allows users to browse menu items, search for specific dishes, add items to cart, and place orders. The application features a responsive design with modal-based food item details and a seamless checkout experience.
 
-## 🛠 Tech Stack
+##  Tech Stack
 
 ### Frontend
 - **React 18.2.0** - UI framework with hooks and context API
@@ -32,26 +32,26 @@ Tomato is a comprehensive food ordering platform that allows users to browse men
 - **Nodemon** - Auto-restart development server
 - **Git** - Version control and collaboration
 
-## 🚀 Features
+##  Features
 
 ### Core Functionality
-- **🍽 Food Menu**: Browse items by category (Salad, Rolls, Pasta, etc.)
-- **🔍 Search**: Real-time search across food names, categories, and descriptions
-- **🛒 Cart Management**: Add/remove items with quantity tracking
-- **💳 Modal Details**: Click food items for detailed view with quantity selector
-- **📦 User Authentication**: Login, registration, and profile management
-- **📱 Responsive Design**: Mobile-friendly interface with adaptive layouts
-- **🔄 Real-time Updates**: Live cart synchronization across components
-- **💾 Local Storage**: Cart persistence across browser sessions
+- ** Food Menu**: Browse items by category (Salad, Rolls, Pasta, etc.)
+- ** Search**: Real-time search across food names, categories, and descriptions
+- ** Cart Management**: Add/remove items with quantity tracking
+- ** Modal Details**: Click food items for detailed view with quantity selector
+- ** User Authentication**: Login, registration, and profile management
+- ** Responsive Design**: Mobile-friendly interface with adaptive layouts
+- ** Real-time Updates**: Live cart synchronization across components
+- ** Local Storage**: Cart persistence across browser sessions
 
 ### Advanced Features
-- **🎯 Category Filtering**: Dynamic menu filtering by food categories
-- **📊 Order History**: Track and view previous orders
-- **🎨 UI/UX**: Modern design with smooth animations and transitions
-- **🔐 Security**: JWT-based authentication with secure token handling
-- **📦 Smart Cart**: Automatic price calculation and delivery charges
+- ** Category Filtering**: Dynamic menu filtering by food categories
+- ** Order History**: Track and view previous orders
+- ** UI/UX**: Modern design with smooth animations and transitions
+- ** Security**: JWT-based authentication with secure token handling
+- ** Smart Cart**: Automatic price calculation and delivery charges
 
-## 🏗 Architecture
+##  Architecture
 
 ### System Design
 The application follows a **layered architecture** with clear separation of concerns:
@@ -76,7 +76,7 @@ The application follows a **layered architecture** with clear separation of conc
 User Interface → React Components → Context API → HTTP Requests → Express API → MongoDB
 ```
 
-## 🛠 Installation & Setup
+##  Installation & Setup
 
 ### Prerequisites
 - **Node.js** (v16 or higher)
@@ -152,7 +152,7 @@ Tomato-ts/
     └── 📁 vite.config.js
 ```
 
-## 🧪 Development Workflow
+##  Development Workflow
 
 ### 1. Development Environment
 - **Local Development**: Full stack running on localhost
@@ -169,7 +169,7 @@ Tomato-ts/
 - **Integration Testing**: API endpoint testing
 - **E2E Testing**: Full user workflow testing
 
-## 🎯 OOP Concepts Applied
+##  OOP Concepts Applied
 
 ### 1. Encapsulation
 - **Context API**: Cart and authentication state encapsulated in StoreContext
@@ -186,7 +186,7 @@ Tomato-ts/
 - **Flexible Components**: Same component handles different data types
 - **API Abstraction**: Consistent interface for different operations
 
-## 🏛 Design Patterns Implemented
+##  Design Patterns Implemented
 
 ### 1. Observer Pattern
 - **Context Subscription**: Components react to global state changes
@@ -200,29 +200,29 @@ Tomato-ts/
 - **Context Provider**: Single source of truth for application state
 - **API Client**: Centralized HTTP client configuration
 
-## 📐 SOLID Principles
+##  SOLID Principles
 
-### ✅ Single Responsibility Principle
+###  Single Responsibility Principle
 - **Component Separation**: Each component handles one specific task
 - **Service Separation**: API services separated by functionality
 - **Controller Separation**: Each endpoint handles specific resource
 
-### ✅ Open/Closed Principle
+###  Open/Closed Principle
 - **Component Extensibility**: New features added without modifying existing code
 - **API Flexibility**: New endpoints added without breaking existing ones
 - **Database Schema**: Easily extendable for new food item types
 
-### ✅ Liskov Substitution Principle
+###  Liskov Substitution Principle
 - **Interface Segregation**: Specific interfaces for different use cases
 - **Component Interfaces**: Props defined as interfaces for type safety
 - **Service Abstractions**: High-level and low-level service separation
 
-### ✅ Dependency Inversion Principle
+###  Dependency Inversion Principle
 - **Dependency Injection**: Context provides dependencies to components
 - **Configuration**: Environment-based dependency management
 - **Testing**: Mock implementations for testing isolation
 
-## 📊 UML Diagrams
+##  UML Diagrams
 
 ### Class Diagram
 ```mermaid
@@ -332,7 +332,7 @@ Users needed a seamless food ordering experience with:
 4. **Progressive Enhancement**: Added features incrementally without breaking existing functionality
 5. **Performance Optimization**: Implemented lazy loading and efficient data fetching
 
-## 🧪 Testing Results
+##  Testing Results
 
 ### Test Cases
 - ✅ **Food Display**: All categories render correctly with proper filtering
@@ -349,7 +349,7 @@ Users needed a seamless food ordering experience with:
 - **Cart Updates**: Immediate UI synchronization
 - **Memory Usage**: Optimized with efficient state management
 
-## 🚀 Deployment & Production
+## Deployment & Production
 
 ### Vercel Deployment
 - **Frontend URL**: https://tomato-ts-9jwz.vercel.app/
@@ -366,7 +366,7 @@ VITE_API_URL=https://tomato-backend.vercel.app/api
 VITE_API_URL=http://localhost:5002
 ```
 
-## 📝 Contributing Guidelines
+##  Contributing Guidelines
 
 ### Development Standards
 - **Code Style**: ESLint configuration with React and TypeScript rules
@@ -382,7 +382,7 @@ VITE_API_URL=http://localhost:5002
 5. **Push** branch: `git push origin feature-name`
 6. **Create** Pull Request: Submit for code review
 
-## 📄 License & Credits
+##  License & Credits
 
 ### License
 This project is licensed under the **MIT License** - see LICENSE file for details.
@@ -395,28 +395,28 @@ This project is licensed under the **MIT License** - see LICENSE file for detail
 
 ---
 
-## 🍅 MANDATORY DELIVERABLES
+##  MANDATORY DELIVERABLES
 
-1. ✅ **GitHub Repository**: Complete, well-structured codebase with proper version control
-2. ✅ **README File**: Comprehensive project documentation including:
+1.  **GitHub Repository**: Complete, well-structured codebase with proper version control
+2.  **README File**: Comprehensive project documentation including:
    - Project title and overview
    - Complete tech stack (languages, frameworks, database, tools)
    - Setup and installation instructions
    - How to run the project
    - Architecture explanation
    - Team member names and contributions
-3. ✅ **Project Report (PDF)** covering:
+3.  **Project Report (PDF)** covering:
    - System Design optimization: How you applied System Design principles to improve scalability, performance, or architecture
    - OOP concepts used: Which OOP principles (Encapsulation, Inheritance, Polymorphism, Abstraction) you applied and where
    - Design Patterns: Which patterns you implemented (at least 2) and why
    - SOLID Principles: How each of the 5 SOLID principles is reflected in your codebase
    - UML Diagrams: Class Diagram, Use Case Diagram, Sequence Diagram, Activity Diagram, ER Diagram (if applicable)
-4. ✅ **Live Demo**: You'll demonstrate your working project during the final evaluation
-5. ✅ **Full Rubric**: Complete evaluation criteria will be shared separately on Slack
+4.  **Live Demo**: You'll demonstrate your working project during the final evaluation
+5.  **Full Rubric**: Complete evaluation criteria will be shared separately on Slack
 
 ---
 
-**🍅 Ready for Production: A complete, scalable, and maintainable food delivery application built with modern development practices and architectural principles.**
+** Ready for Production: A complete, scalable, and maintainable food delivery application built with modern development practices and architectural principles.**
 
 ## Tech Stack
 
