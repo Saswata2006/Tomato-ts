@@ -4,6 +4,7 @@ import { assets } from '../../assets/assets'
 import { StoreContext } from '../../Context/StoreContext';
 import FoodItemModal from '../FoodItemModal/FoodItemModal';
 import getImageUrl from '../../utils/imageUrl';
+import formatPrice from '../../utils/formatPrice';
 
 const FoodItem = ({ image, name, price, desc , id, category }) => {
 
@@ -14,11 +15,7 @@ const FoodItem = ({ image, name, price, desc , id, category }) => {
     const addToCart = context?.addToCart || (() => {});
     const removeFromCart = context?.removeFromCart || (() => {});
     const url = context?.url || "";
-    const currency = context?.currency || "¥";
-
-    // Debug logging
-    console.log('FoodItem - cartItems:', cartItems);
-    console.log('FoodItem - addToCart function:', typeof addToCart);
+    const currency = context?.currency || "₹";
 
     const handleItemClick = () => {
         setShowModal(true);
@@ -56,7 +53,7 @@ const FoodItem = ({ image, name, price, desc , id, category }) => {
                         <p>{name}</p> <img src={assets.rating_starts} alt="" />
                     </div>
                     <p className="food-item-desc">{desc}</p>
-                    <p className="food-item-price">{currency}{price}</p>
+                    <p className="food-item-price">{formatPrice(price, currency)}</p>
                 </div>
             </div>
             {showModal && (

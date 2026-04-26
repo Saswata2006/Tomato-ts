@@ -15,33 +15,30 @@ const StoreContextProvider = (props) => {
     const currency = "₹";
     const deliveryCharge = 50;
 
-    const addToCart = async (itemId) => {
-        let newCartItems;
-        if (!cartItems[itemId]) {
-            newCartItems = { ...cartItems, [itemId]: 1 };
-            setCartItems(newCartItems);
-        }
-        else {
-            newCartItems = { ...cartItems, [itemId]: cartItems[itemId] + 1 };
-            setCartItems(newCartItems);
-        }
-        // Save to localStorage
+    const saveCart = async (newCartItems, authToken = token) => {
+        setCartItems(newCartItems);
         localStorage.setItem('cartItems', JSON.stringify(newCartItems));
-        
-        if (token) {
-            await axios.post(url + "/api/cart/add", { itemId }, { headers: { token } });
+        if (authToken) {
+            await axios.post(url + "/api/cart/set", { cartData: newCartItems }, { headers: { token: authToken } });
         }
     }
 
-    const removeFromCart = async (itemId) => {
-        let newCartItems = { ...cartItems, [itemId]: cartItems[itemId] - 1 };
-        setCartItems(newCartItems);
-        // Save to localStorage
-        localStorage.setItem('cartItems', JSON.stringify(newCartItems));
-        
-        if (token) {
-            await axios.post(url + "/api/cart/remove", { itemId }, { headers: { token } });
+    const addToCart = async (itemId, quantity = 1) => {
+        const currentQuantity = Number(cartItems[itemId]) || 0;
+        const newCartItems = { ...cartItems, [itemId]: currentQuantity + quantity };
+        await saveCart(newCartItems);
+    }
+
+    const removeFromCart = async (itemId, quantity = 1) => {
+        const currentQuantity = Number(cartItems[itemId]) || 0;
+        const nextQuantity = Math.max(0, currentQuantity - quantity);
+        const newCartItems = { ...cartItems };
+        if (nextQuantity > 0) {
+            newCartItems[itemId] = nextQuantity;
+        } else {
+            delete newCartItems[itemId];
         }
+        await saveCart(newCartItems);
     }
 
     const getTotalCartAmount = () => {
@@ -50,7 +47,7 @@ const StoreContextProvider = (props) => {
             try {
               if (cartItems[item] > 0) {
                 let itemInfo = food_list.find((product) => product._id === item);
-                totalAmount += itemInfo.price * cartItems[item];
+                if (itemInfo) totalAmount += Number(itemInfo.price) * Number(cartItems[item]);
             }  
             } catch (error) {
                 
@@ -65,9 +62,19 @@ const StoreContextProvider = (props) => {
         setFoodList(response.data.data)
     }
 
-    const loadCartData = async (token) => {
-        const response = await axios.get(url + "/api/cart/get", {}, { headers: token });
-        setCartItems(response.data.cartData);
+    const loadCartData = async (authToken) => {
+        const rawToken = typeof authToken === "string" ? authToken : authToken?.token;
+        const response = await axios.get(url + "/api/cart/get", { headers: { token: rawToken } });
+        const serverCart = response.data.cartData || {};
+        const savedCart = JSON.parse(localStorage.getItem('cartItems') || "{}");
+        const mergedCart = { ...serverCart };
+        for (const [itemId, quantity] of Object.entries(savedCart)) {
+            const parsedQuantity = Number(quantity);
+            if (parsedQuantity > 0) {
+                mergedCart[itemId] = Math.max(Number(mergedCart[itemId]) || 0, parsedQuantity);
+            }
+        }
+        await saveCart(mergedCart, rawToken);
     }
 
     // Search functionality
@@ -113,7 +120,7 @@ const StoreContextProvider = (props) => {
             
             if (localStorage.getItem("token")) {
                 setToken(localStorage.getItem("token"))
-                await loadCartData({ token: localStorage.getItem("token") })
+                await loadCartData(localStorage.getItem("token"))
             }
         }
         loadData()
@@ -132,6 +139,7 @@ const StoreContextProvider = (props) => {
         setToken,
         loadCartData,
         setCartItems,
+        saveCart,
         searchQuery,
         setSearchQuery,
         filterFoodItems,
