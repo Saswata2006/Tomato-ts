@@ -21,7 +21,8 @@ const AdminDashboard = () => {
                 if (res.data.success) setStats(res.data.data)
                 else toast.error(res.data.message || 'Failed to load stats')
             } catch (err) {
-                toast.error('Server error — check backend is running')
+                const msg = err.response?.data?.message || err.message || 'Server error'
+                toast.error(`Dashboard: ${msg}`)
                 console.error(err)
             }
             setLoading(false)
