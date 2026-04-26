@@ -23,7 +23,7 @@ const AdminOrders = () => {
             const res = await axios.get(`${API_URL}/api/order/list`, { headers: adminHeaders() })
             if (res.data.success) setOrders(res.data.data.reverse())
             else toast.error('Failed to load orders')
-        } catch (err) { console.error(err); toast.error('Server error') }
+        } catch (err) { console.error(err); toast.error(`Orders: ${err.response?.data?.message || err.message}`) }
         setLoading(false)
     }
 

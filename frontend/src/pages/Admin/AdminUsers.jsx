@@ -14,7 +14,7 @@ const AdminUsers = () => {
                 const res = await axios.get(`${API_URL}/api/admin/users`, { headers: adminHeaders() })
                 if (res.data.success) setUsers(res.data.data)
                 else toast.error('Failed to load users')
-            } catch (err) { console.error(err); toast.error('Server error') }
+            } catch (err) { console.error(err); toast.error(`Users: ${err.response?.data?.message || err.message}`) }
             setLoading(false)
         }
         fetch()
